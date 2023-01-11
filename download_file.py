@@ -26,15 +26,36 @@ def make_path_absolute(path):
         path = os.getcwd() + "/" + path
         return path
 
-def download_file(session, source, destination):
+def download_file(session, data_object_path, destination):
+
+    """Download file to the destination directory
+    
+    Arguments
+    ---------
+    session: object
+        An iRODSSession object
+    data_object-path: str
+        The path to the data object in iRODS
+    destination: str
+        The path to the destination directory
+          
+    Returns
+    -------
+    Nothing
+    """
 
     # transform destination to an absolute path, if necessary
     destination = make_path_absolute(destination)
 
+    # check if destination exists
+    if not os.path.isdir(destination):
+        print("The destination directory you specified does not exist.")
+        return
+
     # when you use the 'get' method and specify a destination path, 
     # it downloads the file to that destination.
 
-    session.data_objects.get(source, destination)
+    session.data_objects.get(data_object_path, destination)
 
 
 
