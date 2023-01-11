@@ -49,11 +49,6 @@ def upload_file(session, filepath, destination):
         print(f"The collection {destination} doesn't exist.")
         return 
 
-    # the put() method requires the full path of the destination,
-    # including the name the dataobject should get
-    filename = os.path.basename(filepath)
-    destination = destination + "/" + filename
-
     # uploading the file
     session.data_objects.put(source, destination)
 
